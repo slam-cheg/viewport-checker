@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ViewPort checker",
+  "name": "Проверь свой ViewPort",
   "icons": [
     {
       "src": "favicon.ico",
