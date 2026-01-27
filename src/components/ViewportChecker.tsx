@@ -279,3 +279,76 @@ const ViewportChecker: React.FC = () => {
                 backgroundColor: '#17a2b8',
                 color: 'white',
                 border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              {t('saveThresholds')}
+            </button>
+          </div>
+        </div>
+
+        <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '20px' }}>
+          <h2>{t('history')}</h2>
+          {history.length === 0 ? (
+            <p>{t('noHistory')}</p>
+          ) : (
+            <div>
+              <button 
+                onClick={clearHistory}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: '#dc3545',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  marginBottom: '15px'
+                }}
+              >
+                {t('clearHistory')}
+              </button>
+              <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                {history.map((item) => (
+                  <div 
+                    key={item.id} 
+                    style={{ 
+                      border: '1px solid #ddd', 
+                      borderRadius: '4px', 
+                      padding: '10px', 
+                      marginBottom: '10px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <div>
+                      <p><strong>{t('timestamp')}:</strong> {item.timestamp}</p>
+                      <p><strong>{t('width')}:</strong> {item.width}px, <strong>{t('height')}:</strong> {item.height}px</p>
+                      <p><strong>{t('orientation')}:</strong> {t(item.orientation)}</p>
+                    </div>
+                    <button 
+                      onClick={() => removeFromHistory(item.id)}
+                      style={{
+                        padding: '5px 10px',
+                        backgroundColor: '#dc3545',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {t('removeFromHistory')}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewportChecker;
