@@ -7,9 +7,10 @@ const ViewportChecker: React.FC = () => {
   const [viewport, setViewport] = useState<ViewportData>({
     width: window.innerWidth,
     height: window.innerHeight,
-    devicePixelRatio: window.devicePixelRatio,
+    aspectRatio: window.innerWidth / window.innerHeight,
+    pixelDensity: window.devicePixelRatio,
     orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
-    timestamp: new Date().toLocaleString()
+    timestamp: Date.now()
   });
 
   const [history, setHistory] = useState<HistoryItem[]>(() => {
@@ -33,9 +34,10 @@ const ViewportChecker: React.FC = () => {
     const newViewport: ViewportData = {
       width: window.innerWidth,
       height: window.innerHeight,
-      devicePixelRatio: window.devicePixelRatio,
+      aspectRatio: window.innerWidth / window.innerHeight,
+      pixelDensity: window.devicePixelRatio,
       orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait',
-      timestamp: new Date().toLocaleString()
+      timestamp: Date.now()
     };
     setViewport(newViewport);
     return newViewport;
@@ -90,10 +92,10 @@ const ViewportChecker: React.FC = () => {
   const exportAsCSV = useCallback(() => {
     const headers = ['Timestamp', 'Width', 'Height', 'Device Pixel Ratio', 'Orientation'];
     const rows = history.map(item => [
-      item.timestamp,
+      new Date(item.timestamp).toLocaleString(),
       item.width,
       item.height,
-      item.devicePixelRatio,
+      item.pixelDensity,
       item.orientation
     ]);
     
@@ -162,9 +164,9 @@ const ViewportChecker: React.FC = () => {
           <div style={{ marginBottom: '15px' }}>
             <p><strong>{t('width')}:</strong> {viewport.width}px</p>
             <p><strong>{t('height')}:</strong> {viewport.height}px</p>
-            <p><strong>{t('devicePixelRatio')}:</strong> {viewport.devicePixelRatio}</p>
+            <p><strong>{t('devicePixelRatio')}:</strong> {viewport.pixelDensity}</p>
             <p><strong>{t('orientation')}:</strong> {t(viewport.orientation)}</p>
-            <p><strong>{t('timestamp')}:</strong> {viewport.timestamp}</p>
+            <p><strong>{t('timestamp')}:</strong> {new Date(viewport.timestamp).toLocaleString()}</p>
           </div>
           
           <div style={{ marginBottom: '15px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
@@ -323,7 +325,7 @@ const ViewportChecker: React.FC = () => {
                     }}
                   >
                     <div>
-                      <p><strong>{t('timestamp')}:</strong> {item.timestamp}</p>
+                      <p><strong>{t('timestamp')}:</strong> {new Date(item.timestamp).toLocaleString()}</p>
                       <p><strong>{t('width')}:</strong> {item.width}px, <strong>{t('height')}:</strong> {item.height}px</p>
                       <p><strong>{t('orientation')}:</strong> {t(item.orientation)}</p>
                     </div>

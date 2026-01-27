@@ -19,6 +19,17 @@ export interface HistoryEntry extends ViewportData {
   id: string;
 }
 
+export interface HistoryItem extends ViewportData {
+  id: string;
+}
+
+export interface ThresholdSettings {
+  minWidth: number;
+  maxWidth: number;
+  minHeight: number;
+  maxHeight: number;
+}
+
 export interface ViewportReport {
   title: string;
   generatedAt: string;
