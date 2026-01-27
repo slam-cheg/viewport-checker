@@ -1,18 +1,29 @@
 export interface ViewportData {
   width: number;
   height: number;
-  devicePixelRatio: number;
-  orientation: 'portrait' | 'landscape';
-  timestamp: string;
+  aspectRatio: number;
+  pixelDensity: number;
+  orientation: 'portrait' | 'landscape' | 'square';
+  timestamp: number;
 }
 
-export interface ThresholdSettings {
-  minWidth: number;
-  maxWidth: number;
-  minHeight: number;
-  maxHeight: number;
-}
-
-export interface HistoryItem extends ViewportData {
+export interface DevicePreset {
   id: string;
+  name: string;
+  width: number;
+  height: number;
+  type: 'mobile' | 'tablet' | 'desktop';
+}
+
+export interface HistoryEntry extends ViewportData {
+  id: string;
+}
+
+export interface ViewportReport {
+  title: string;
+  generatedAt: string;
+  currentViewport: ViewportData;
+  history: HistoryEntry[];
+  userAgent: string;
+  devicePresets: DevicePreset[];
 }

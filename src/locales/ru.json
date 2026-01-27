@@ -1,0 +1,48 @@
+{
+  "app": {
+    "title": "Проверка Viewport",
+    "description": "Инструмент для проверки и анализа информации о viewport"
+  },
+  "viewport": {
+    "width": "Ширина",
+    "height": "Высота",
+    "aspectRatio": "Соотношение сторон",
+    "pixelDensity": "Плотность пикселей",
+    "orientation": "Ориентация",
+    "portrait": "Портретная",
+    "landscape": "Альбомная",
+    "square": "Квадрат"
+  },
+  "history": {
+    "title": "История Viewport",
+    "timestamp": "Время",
+    "clear": "Очистить историю",
+    "empty": "История пуста"
+  },
+  "devices": {
+    "title": "Сравнить с устройствами",
+    "iphone13": "iPhone 13",
+    "iphone13Pro": "iPhone 13 Pro",
+    "iphoneSE": "iPhone SE",
+    "ipadPro": "iPad Pro",
+    "samsungGalaxy": "Samsung Galaxy S21",
+    "desktopHD": "Desktop HD",
+    "desktopFullHD": "Desktop Full HD",
+    "desktop4K": "Desktop 4K"
+  },
+  "actions": {
+    "downloadReport": "Скачать отчет",
+    "toggleHistory": "Показать/скрыть историю",
+    "toggleDevices": "Показать/скрыть устройства",
+    "changeLanguage": "Сменить язык"
+  },
+  "language": {
+    "en": "English",
+    "ru": "Русский"
+  },
+  "report": {
+    "title": "Отчет Viewport",
+    "generatedAt": "Сгенерировано",
+    "userAgent": "User Agent"
+  }
+}

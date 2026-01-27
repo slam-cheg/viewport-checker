@@ -1,0 +1,48 @@
+{
+  "app": {
+    "title": "Viewport Checker",
+    "description": "Tool for checking and analyzing viewport information"
+  },
+  "viewport": {
+    "width": "Width",
+    "height": "Height",
+    "aspectRatio": "Aspect Ratio",
+    "pixelDensity": "Pixel Density",
+    "orientation": "Orientation",
+    "portrait": "Portrait",
+    "landscape": "Landscape",
+    "square": "Square"
+  },
+  "history": {
+    "title": "Viewport History",
+    "timestamp": "Timestamp",
+    "clear": "Clear History",
+    "empty": "No history yet"
+  },
+  "devices": {
+    "title": "Compare with Devices",
+    "iphone13": "iPhone 13",
+    "iphone13Pro": "iPhone 13 Pro",
+    "iphoneSE": "iPhone SE",
+    "ipadPro": "iPad Pro",
+    "samsungGalaxy": "Samsung Galaxy S21",
+    "desktopHD": "Desktop HD",
+    "desktopFullHD": "Desktop Full HD",
+    "desktop4K": "Desktop 4K"
+  },
+  "actions": {
+    "downloadReport": "Download Report",
+    "toggleHistory": "Toggle History",
+    "toggleDevices": "Toggle Devices",
+    "changeLanguage": "Change Language"
+  },
+  "language": {
+    "en": "English",
+    "ru": "Русский"
+  },
+  "report": {
+    "title": "Viewport Report",
+    "generatedAt": "Generated at",
+    "userAgent": "User Agent"
+  }
+}
