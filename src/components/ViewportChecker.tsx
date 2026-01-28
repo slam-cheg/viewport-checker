@@ -143,9 +143,9 @@ const ViewportChecker: React.FC = () => {
   }, [i18n]);
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>{t('viewportChecker')}</h1>
+    <div className="viewport-checker">
+      <div className="checker-header">
+        <h2>{t('viewportChecker')}</h2>
         <div>
           <select 
             value={i18n.language} 
@@ -158,187 +158,123 @@ const ViewportChecker: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '20px' }}>
-          <h2>{t('viewportInfo')}</h2>
+      <div className="checker-grid">
+        <div className="checker-card">
+          <h3>{t('viewportInfo')}</h3>
           <div style={{ marginBottom: '15px' }}>
-            <p><strong>{t('width')}:</strong> {viewport.width}px</p>
-            <p><strong>{t('height')}:</strong> {viewport.height}px</p>
-            <p><strong>{t('devicePixelRatio')}:</strong> {viewport.pixelDensity}</p>
-            <p><strong>{t('orientation')}:</strong> {t(viewport.orientation)}</p>
-            <p><strong>{t('timestamp')}:</strong> {new Date(viewport.timestamp).toLocaleString()}</p>
+            <p className="checker-info-row"><strong>{t('width')}:</strong> {viewport.width}px</p>
+            <p className="checker-info-row"><strong>{t('height')}:</strong> {viewport.height}px</p>
+            <p className="checker-info-row"><strong>{t('devicePixelRatio')}:</strong> {viewport.pixelDensity}</p>
+            <p className="checker-info-row"><strong>{t('orientation')}:</strong> {t(viewport.orientation)}</p>
+            <p className="checker-info-row"><strong>{t('timestamp')}:</strong> {new Date(viewport.timestamp).toLocaleString()}</p>
           </div>
           
-          <div style={{ marginBottom: '15px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+          <div className="checker-status">
             <strong>Статус:</strong> {checkViewportStatus()}
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+          <div className="checker-controls">
             <button 
+              className="btn btn-primary"
               onClick={() => {
                 const data = checkViewport();
                 addToHistory(data);
-              }}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
               }}
             >
               {t('checkViewport')}
             </button>
             <button 
+              className="btn btn-success"
               onClick={() => addToHistory(viewport)}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#28a745',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
             >
               {t('addToHistory')}
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div className="checker-controls">
             <button 
+              className="btn btn-secondary"
               onClick={exportAsJSON}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#6c757d',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
             >
               {t('exportAsJSON')}
             </button>
             <button 
+              className="btn btn-secondary"
               onClick={exportAsCSV}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#6c757d',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
             >
               {t('exportAsCSV')}
             </button>
           </div>
         </div>
 
-        <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '20px' }}>
-          <h2>{t('thresholdSettings')}</h2>
-          <div style={{ marginBottom: '15px' }}>
-            <div style={{ marginBottom: '10px' }}>
-              <label style={{ display: 'block', marginBottom: '5px' }}>{t('minWidth')}:</label>
+        <div className="checker-card">
+          <h3>{t('thresholdSettings')}</h3>
+          <div className="threshold-form">
+            <div className="form-group">
+              <label>{t('minWidth')}:</label>
               <input
                 type="number"
                 value={thresholdInput.minWidth}
                 onChange={(e) => setThresholdInput(prev => ({ ...prev, minWidth: parseInt(e.target.value) || 0 }))}
-                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
               />
             </div>
-            <div style={{ marginBottom: '10px' }}>
-              <label style={{ display: 'block', marginBottom: '5px' }}>{t('maxWidth')}:</label>
+            <div className="form-group">
+              <label>{t('maxWidth')}:</label>
               <input
                 type="number"
                 value={thresholdInput.maxWidth}
                 onChange={(e) => setThresholdInput(prev => ({ ...prev, maxWidth: parseInt(e.target.value) || 0 }))}
-                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
               />
             </div>
-            <div style={{ marginBottom: '10px' }}>
-              <label style={{ display: 'block', marginBottom: '5px' }}>{t('minHeight')}:</label>
+            <div className="form-group">
+              <label>{t('minHeight')}:</label>
               <input
                 type="number"
                 value={thresholdInput.minHeight}
                 onChange={(e) => setThresholdInput(prev => ({ ...prev, minHeight: parseInt(e.target.value) || 0 }))}
-                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
               />
             </div>
-            <div style={{ marginBottom: '15px' }}>
-              <label style={{ display: 'block', marginBottom: '5px' }}>{t('maxHeight')}:</label>
+            <div className="form-group">
+              <label>{t('maxHeight')}:</label>
               <input
                 type="number"
                 value={thresholdInput.maxHeight}
                 onChange={(e) => setThresholdInput(prev => ({ ...prev, maxHeight: parseInt(e.target.value) || 0 }))}
-                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
               />
             </div>
             <button 
+              className="btn btn-info"
               onClick={saveThresholds}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#17a2b8',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
             >
               {t('saveThresholds')}
             </button>
           </div>
         </div>
 
-        <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '20px' }}>
-          <h2>{t('history')}</h2>
+        <div className="checker-card" style={{ gridColumn: 'span 2' }}>
+          <h3>{t('history')}</h3>
           {history.length === 0 ? (
             <p>{t('noHistory')}</p>
           ) : (
             <div>
               <button 
+                className="btn btn-danger btn-sm"
                 onClick={clearHistory}
-                style={{
-                  padding: '8px 16px',
-                  backgroundColor: '#dc3545',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  marginBottom: '15px'
-                }}
+                style={{ marginBottom: '15px' }}
               >
                 {t('clearHistory')}
               </button>
-              <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              <div className="history-list">
                 {history.map((item) => (
-                  <div 
-                    key={item.id} 
-                    style={{ 
-                      border: '1px solid #ddd', 
-                      borderRadius: '4px', 
-                      padding: '10px', 
-                      marginBottom: '10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}
-                  >
-                    <div>
+                  <div key={item.id} className="history-item">
+                    <div className="history-details">
                       <p><strong>{t('timestamp')}:</strong> {new Date(item.timestamp).toLocaleString()}</p>
                       <p><strong>{t('width')}:</strong> {item.width}px, <strong>{t('height')}:</strong> {item.height}px</p>
                       <p><strong>{t('orientation')}:</strong> {t(item.orientation)}</p>
                     </div>
                     <button 
+                      className="btn btn-danger btn-sm"
                       onClick={() => removeFromHistory(item.id)}
-                      style={{
-                        padding: '5px 10px',
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
-                      }}
                     >
                       {t('removeFromHistory')}
                     </button>
