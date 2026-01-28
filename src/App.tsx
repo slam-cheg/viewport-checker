@@ -1,75 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useViewport } from './hooks/useViewport';
-import ViewportInfo from './components/ViewportInfo';
-import ViewportHistory from './components/ViewportHistory';
-import DeviceComparison from './components/DeviceComparison';
-import ViewportVisualizer from './components/ViewportVisualizer';
-import LanguageSwitcher from './components/LanguageSwitcher';
 import './App.css';
 
-const App: React.FC = () => {
+function App() {
   const { t } = useTranslation();
-  const {
-    viewport,
-    history,
-    devices,
-    clearHistory,
-    downloadReport,
-  } = useViewport();
-
-  const [showHistory, setShowHistory] = useState(true);
-  const [showDevices, setShowDevices] = useState(true);
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <div className="header-content">
-          <h1>{t('app.title')}</h1>
-          <p className="app-description">{t('app.description')}</p>
-          <LanguageSwitcher />
-        </div>
+    <div className="App">
+      <header className="App-header">
+        <h1>{t('app.title')}</h1>
+        <p>{t('app.subtitle')}</p>
       </header>
-
-      <main className="app-main">
-        <div className="controls">
-          <button onClick={downloadReport} className="control-btn" title={t('actions.downloadReport')}>
-            📥 {t('actions.downloadReport')}
-          </button>
-          <button onClick={() => setShowHistory(!showHistory)} className="control-btn" title={t('actions.toggleHistory')}>
-            {showHistory ? '📕' : '📖'} {t('actions.toggleHistory')}
-          </button>
-          <button onClick={() => setShowDevices(!showDevices)} className="control-btn" title={t('actions.toggleDevices')}>
-            {showDevices ? '📱' : '📲'} {t('actions.toggleDevices')}
-          </button>
-        </div>
-
-        <div className="content-grid">
-          <div className="main-section">
-            <ViewportInfo viewport={viewport} />
-            <ViewportVisualizer viewport={viewport} history={history} />
+      
+      <main className="App-main">
+        <div className="App-content">
+          <h2>{t('content.mainHeading')}</h2>
+          <p>{t('content.description')}</p>
+          <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px', maxWidth: '800px', width: '100%' }}>
+            <h3>{t('content.exampleSection')}</h3>
+            <p>{t('content.exampleText')}</p>
+            <div style={{ height: '300px', overflow: 'auto', border: '1px solid #ddd', padding: '10px', marginTop: '10px' }}>
+              {Array.from({ length: 20 }).map((_, index) => (
+                <div key={index} style={{ padding: '10px', borderBottom: '1px solid #eee' }}>
+                  {t('content.listItem', { number: index + 1 })}
+                </div>
+              ))}
+            </div>
           </div>
-
-          {showHistory && (
-            <div className="sidebar-section">
-              <ViewportHistory history={history} onClearHistory={clearHistory} />
-            </div>
-          )}
-
-          {showDevices && (
-            <div className="sidebar-section">
-              <DeviceComparison currentViewport={viewport} devices={devices} />
-            </div>
-          )}
         </div>
       </main>
-
-      <footer className="app-footer">
-        <p>Viewport Checker v0.1.0</p>
-        <p>Resize your browser window to see changes</p>
+      
+      <footer className="App-footer">
+        <p>{t('footer.copyright')}</p>
       </footer>
     </div>
   );
-};
+}
 
 export default App;
