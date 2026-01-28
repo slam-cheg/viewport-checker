@@ -1,103 +1,84 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  const { t } = useTranslation();
+  const [viewportHeight, setViewportHeight] = useState<number>(0);
+  const [viewportWidth, setViewportWidth] = useState<number>(0);
+  const [isHeightLimited, setIsHeightLimited] = useState<boolean>(false);
+
+  useEffect(() => {
+    const updateViewportDimensions = () => {
+      setViewportHeight(window.innerHeight);
+      setViewportWidth(window.innerWidth);
+      setIsHeightLimited(window.innerHeight < 500);
+    };
+
+    updateViewportDimensions();
+    window.addEventListener('resize', updateViewportDimensions);
+    window.addEventListener('orientationchange', updateViewportDimensions);
+
+    return () => {
+      window.removeEventListener('resize', updateViewportDimensions);
+      window.removeEventListener('orientationchange', updateViewportDimensions);
+    };
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-title">{t('title')}</h1>
+        <h1>Viewport Checker</h1>
+        <p className="App-description">
+          This application demonstrates viewport height limitation functionality.
+          When the viewport height is less than 500px, content will be limited.
+        </p>
       </header>
-      <main className="App-main">
-        <section className="content-section">
-          <h2>{t('content.exampleSection')}</h2>
-          <p>{t('content.exampleText')}</p>
-          <ul className="content-list">
-            {Array.from({ length: 20 }, (_, i) => (
-              <li key={i}>{t('content.listItem', { number: i + 1 })}</li>
+
+      <main className={`App-main ${isHeightLimited ? 'height-limited' : ''}`}>
+        <div className="viewport-info">
+          <h2>Current Viewport Dimensions</h2>
+          <div className="dimensions">
+            <div className="dimension">
+              <span className="label">Height:</span>
+              <span className={`value ${isHeightLimited ? 'warning' : ''}`}>
+                {viewportHeight}px
+                {isHeightLimited && <span className="warning-icon">⚠️</span>}
+              </span>
+            </div>
+            <div className="dimension">
+              <span className="label">Width:</span>
+              <span className="value">{viewportWidth}px</span>
+            </div>
+          </div>
+          
+          <div className={`status ${isHeightLimited ? 'limited' : 'normal'}`}>
+            {isHeightLimited 
+              ? 'Viewport height is LIMITED (less than 500px)' 
+              : 'Viewport height is NORMAL (500px or more)'}
+          </div>
+        </div>
+
+        <div className="scroll-example">
+          <h3>Scroll Example Section</h3>
+          <p>This section demonstrates how content behaves when viewport height is limited.</p>
+          <div className="scroll-content">
+            {Array.from({ length: 20 }).map((_, index) => (
+              <div key={index} className="scroll-item">
+                Item {index + 1} - Scroll to see more content
+              </div>
             ))}
-          </ul>
-        </section>
+          </div>
+        </div>
       </main>
+
       <footer className="App-footer">
-        <p>{t('footer.text')}</p>
+        <p>Viewport Checker Application &copy; {new Date().getFullYear()}</p>
+        <p className="footer-note">
+          Resize your browser window to see how the viewport limitation works.
+          Try making the window height less than 500px.
+        </p>
       </footer>
     </div>
   );
 }
 
 export default App;
-
-/* FILE: src/App.css */
-.App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.App-header {
-  background-color: #282c34;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.App-main {
-  flex: 1;
-  overflow-y: auto;
-  max-height: calc(100vh - 140px);
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-.content-section {
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.content-section h2 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.content-section p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
-
-.content-list {
-  list-style-type: none;
-  padding: 0;
-  text-align: left;
-}
-
-.content-list li {
-  padding: 10px 15px;
-  margin: 5px 0;
-  background-color: #f8f9fa;
-  border-left: 4px solid #007bff;
-  border-radius: 4px;
-}
-
-.App-footer {
-  background-color: #282c34;
-  padding: 15px;
-  color: white;
-  font-size: 0.9rem;
-}
-
-.App-footer p {
-  margin: 0;
-}
