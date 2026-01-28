@@ -3,6 +3,8 @@
     "title": "Проверка Viewport",
     "description": "Инструмент для проверки и анализа информации о viewport"
   },
+  "viewportChecker": "Проверка Viewport",
+  "viewportInfo": "Информация о Viewport",
   "viewport": {
     "width": "Ширина",
     "height": "Высота",
@@ -13,12 +15,28 @@
     "landscape": "Альбомная",
     "square": "Квадрат"
   },
-  "history": {
-    "title": "История Viewport",
-    "timestamp": "Время",
-    "clear": "Очистить историю",
-    "empty": "История пуста"
-  },
+  "timestamp": "Время",
+  "history": "История",
+  "noHistory": "История пуста",
+  "clearHistory": "Очистить историю",
+  "removeFromHistory": "Удалить",
+  "addToHistory": "Добавить в историю",
+  "checkViewport": "Проверить Viewport",
+  "exportAsJSON": "Экспорт JSON",
+  "exportAsCSV": "Экспорт CSV",
+  "exportSuccess": "Экспорт завершен успешно!",
+  "thresholdSettings": "Настройки порогов",
+  "minWidth": "Мин. Ширина",
+  "maxWidth": "Макс. Ширина",
+  "minHeight": "Мин. Высота",
+  "maxHeight": "Макс. Высота",
+  "saveThresholds": "Сохранить пороги",
+  "thresholdsSaved": "Пороги сохранены!",
+  "viewportBelowMin": "Viewport меньше минимальных требований",
+  "viewportAboveMax": "Viewport больше максимальных требований",
+  "viewportWithinRange": "Viewport в допустимом диапазоне",
+  "russian": "Русский",
+  "english": "Английский",
   "devices": {
     "title": "Сравнить с устройствами",
     "iphone13": "iPhone 13",

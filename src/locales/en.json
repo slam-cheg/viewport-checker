@@ -3,6 +3,8 @@
     "title": "Viewport Checker",
     "description": "Tool for checking and analyzing viewport information"
   },
+  "viewportChecker": "Viewport Checker",
+  "viewportInfo": "Viewport Info",
   "viewport": {
     "width": "Width",
     "height": "Height",
@@ -13,12 +15,28 @@
     "landscape": "Landscape",
     "square": "Square"
   },
-  "history": {
-    "title": "Viewport History",
-    "timestamp": "Timestamp",
-    "clear": "Clear History",
-    "empty": "No history yet"
-  },
+  "timestamp": "Timestamp",
+  "history": "History",
+  "noHistory": "No history available",
+  "clearHistory": "Clear History",
+  "removeFromHistory": "Remove",
+  "addToHistory": "Add to History",
+  "checkViewport": "Check Viewport",
+  "exportAsJSON": "Export JSON",
+  "exportAsCSV": "Export CSV",
+  "exportSuccess": "Export successful!",
+  "thresholdSettings": "Threshold Settings",
+  "minWidth": "Min Width",
+  "maxWidth": "Max Width",
+  "minHeight": "Min Height",
+  "maxHeight": "Max Height",
+  "saveThresholds": "Save Thresholds",
+  "thresholdsSaved": "Thresholds saved!",
+  "viewportBelowMin": "Viewport is below minimum requirements",
+  "viewportAboveMax": "Viewport is above maximum requirements",
+  "viewportWithinRange": "Viewport is within acceptable range",
+  "russian": "Russian",
+  "english": "English",
   "devices": {
     "title": "Compare with Devices",
     "iphone13": "iPhone 13",
@@ -38,7 +56,7 @@
   },
   "language": {
     "en": "English",
-    "ru": "Русский"
+    "ru": "Russian"
   },
   "report": {
     "title": "Viewport Report",
