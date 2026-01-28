@@ -1,16 +1,11 @@
 {
-  "app": {
-    "title": "Viewport Checker",
-    "subtitle": "Screen height limitation demo"
-  },
+  "title": "Viewport Checker",
   "content": {
-    "mainHeading": "Main Content Area",
-    "description": "This content area is limited to the viewport height. The header has been reduced in size and the layout uses flexbox to ensure proper height constraints.",
-    "exampleSection": "Scrollable Content Example",
-    "exampleText": "Below is an example of scrollable content within the constrained viewport:",
-    "listItem": "List item {{number}} - This demonstrates overflow handling within the viewport"
+    "exampleSection": "Example Content Section",
+    "exampleText": "This is an example of scrollable content within a viewport-limited area. The list below demonstrates how content behaves when it exceeds the available space.",
+    "listItem": "List item {{number}}"
   },
   "footer": {
-    "copyright": "© 2024 Viewport Checker. All rights reserved."
+    "text": "Viewport Checker © 2023"
   }
 }
