@@ -5,6 +5,33 @@ import i18n from '../i18n';
 import ViewportInfo from '../components/ViewportInfo';
 import { ViewportData } from '../types/viewport';
 
+// Initialize i18n with resources for testing
+i18n.init({
+  lng: 'en',
+  resources: {
+    en: {
+      translation: {
+        'viewport.width': 'Width',
+        'viewport.height': 'Height',
+        'viewport.aspectRatio': 'Aspect Ratio',
+        'viewport.pixelDensity': 'Pixel Density',
+        'viewport.orientation': 'Orientation',
+        'viewport.landscape': 'Landscape',
+        'app.title': 'Viewport Info'
+      }
+    },
+    ru: {
+      translation: {
+        'viewport.width': 'Ширина',
+        'viewport.height': 'Высота',
+        'viewport.aspectRatio': 'Соотношение сторон',
+        'viewport.orientation': 'Ориентация',
+        'viewport.landscape': 'Альбомная'
+      }
+    }
+  }
+});
+
 const mockViewport: ViewportData = {
   width: 1920,
   height: 1080,

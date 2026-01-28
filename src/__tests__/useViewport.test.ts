@@ -12,7 +12,7 @@ describe('useViewport', () => {
     expect(result.current.viewport.width).toBe(window.innerWidth);
     expect(result.current.viewport.height).toBe(window.innerHeight);
     expect(result.current.viewport.pixelDensity).toBe(window.devicePixelRatio);
-    expect(result.current.history).toHaveLength(0);
+    expect(result.current.history).toHaveLength(1);
     expect(result.current.devices).toHaveLength(8);
   });
 

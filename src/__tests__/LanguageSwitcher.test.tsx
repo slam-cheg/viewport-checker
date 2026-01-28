@@ -4,6 +4,21 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '../i18n';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
+// Initialize i18n for testing to avoid backend issues
+i18n.init({
+  lng: 'en',
+  resources: {
+    en: { translation: {} },
+    ru: { translation: {} }
+  },
+  interpolation: {
+    escapeValue: false,
+  },
+  react: { 
+    useSuspense: false // Disable suspense for tests
+  }
+});
+
 describe('LanguageSwitcher', () => {
   beforeEach(() => {
     i18n.changeLanguage('en');
@@ -32,3 +47,5 @@ describe('LanguageSwitcher', () => {
     
     expect(i18n.language).toBe('ru');
     expect(localStorage.getItem('viewport-checker-language')).toBe('ru');
+  });
+});

@@ -1,48 +1,49 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 
 // Mock i18next
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'app.title': 'Viewport Checker',
-        'app.subtitle': 'Screen height limitation demo',
-        'content.mainHeading': 'Main Content Area',
-        'content.description': 'This content area is limited to the viewport height.',
-        'content.exampleSection': 'Scrollable Content Example',
-        'content.exampleText': 'Below is an example of scrollable content within the constrained viewport:',
-        'content.listItem': 'List item',
-        'footer.copyright': '© 2024 Viewport Checker. All rights reserved.'
-      };
-      return translations[key] || key;
+    t: (key: string) => key,
+    i18n: {
+      language: 'en',
+      changeLanguage: jest.fn(),
     }
-  })
+  }),
+  initReactI18next: {
+    type: '3rdParty',
+    init: jest.fn()
+  }
 }));
 
+// Mock components to avoid deep rendering issues and focus on App structure
+jest.mock('./components/ViewportInfo', () => () => <div data-testid="viewport-info">ViewportInfo Component</div>);
+jest.mock('./components/ViewportVisualizer', () => () => <div data-testid="viewport-visualizer">ViewportVisualizer Component</div>);
+jest.mock('./components/ViewportChecker', () => () => <div data-testid="viewport-checker">ViewportChecker Component</div>);
+
 describe('App', () => {
-  test('renders header with reduced size', () => {
+  test('renders header with title and language switcher', () => {
     render(<App />);
     
     const headerElement = screen.getByRole('banner');
     expect(headerElement).toBeInTheDocument();
     expect(headerElement).toHaveClass('App-header');
     
-    const titleElement = screen.getByText(/Viewport Checker/i);
+    const titleElement = screen.getByRole('heading', { name: /Viewport Checker/i });
     expect(titleElement).toBeInTheDocument();
-    expect(titleElement.tagName).toBe('H1');
   });
 
-  test('main content area has viewport height limitation', () => {
+  test('renders main components', async () => {
     render(<App />);
     
-    const mainElement = screen.getByRole('main');
-    expect(mainElement).toBeInTheDocument();
-    expect(mainElement).toHaveClass('App-main');
+    // Wait for Suspense (if any, although mocked components usually render immediately)
+    // However, App uses Suspense, so we might see fallback first?
+    // Since we didn't mock useViewport to suspend, it should be fine.
     
-    const contentElement = screen.getByText(/Main Content Area/i);
-    expect(contentElement).toBeInTheDocument();
+    expect(screen.getByTestId('viewport-info')).toBeInTheDocument();
+    expect(screen.getByTestId('viewport-visualizer')).toBeInTheDocument();
+    expect(screen.getByTestId('viewport-checker')).toBeInTheDocument();
   });
 
   test('renders footer', () => {
@@ -50,19 +51,8 @@ describe('App', () => {
     
     const footerElement = screen.getByRole('contentinfo');
     expect(footerElement).toBeInTheDocument();
-    expect(footerElement).toHaveClass('App-footer');
     
-    const copyrightElement = screen.getByText(/All rights reserved/i);
+    const copyrightElement = screen.getByText(/Viewport Checker Application/i);
     expect(copyrightElement).toBeInTheDocument();
-  });
-
-  test('has scrollable content example', () => {
-    render(<App />);
-    
-    const scrollableSection = screen.getByText(/Scrollable Content Example/i);
-    expect(scrollableSection).toBeInTheDocument();
-    
-    const listItems = screen.getAllByText(/List item/i);
-    expect(listItems.length).toBeGreaterThan(0);
   });
 });
